@@ -1,7 +1,5 @@
 const { merge } = require('webpack-merge');
 
-console.log('merge: ', merge);
-
 const path = require('path');
 const base = require('../webpack.config.js');
 
@@ -18,11 +16,15 @@ module.exports = merge(base, {
     historyApiFallback: {
       index: '/index.html',
     },
-    proxy: { // 重写方式，代理
+    proxy: {
       '/api': {
+        // 要访问的跨域的域名
         target: 'http://localhost:3000',
-        // changeOrigin: true,
-        pathReWrite: { '^/api': '' },
+        // ws: true,
+        changOrigin: true,
+        pathRewrite: {
+          '^/api': '',
+        },
       },
     },
   },

@@ -1,14 +1,14 @@
-// import { get, post } from '../utils/request';
+import { get, post } from '../utils/request';
 
-// const baseURL = '/';
-// class API {
-//   @get({ baseURL, url: '/xxx/get' })
-//   getList
+const baseURL = 'http://localhost:8082';
+class API {
+  @get({ baseURL, url: '/api/heros' })
+  getList
 
-//   @post({ baseURL, url: '/xxx/post' })
-//   create
-// }
+  @post({ baseURL, url: '/xxx/post' })
+  create
+}
 
-// const api = new API();
+const api = new API();
 
-// export default api;
+export default api;

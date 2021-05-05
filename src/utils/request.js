@@ -1,4 +1,6 @@
 import axios from 'axios';
+import NProgress from 'nprogress';
+import { message } from 'antd';
 
 class HttpRequest {
   constructor() {
@@ -10,14 +12,14 @@ class HttpRequest {
   setInterceptor(instance, url, loading = true) {
     // 每个接口是否需要loading，默认需要展示
     instance.interceptors.request.use((config) => {
-      console.log('config:', config);
       config.headers['Content-Type'] = 'application/json;charset=UTF-8';
-
+      NProgress.start();
       if (Object.keys(this.queue).length === 0 && loading) {
         // 开启loading
+        NProgress.start();
       }
       const { CancelToken } = axios;
-      config.cancenToken = new CancelToken((c) => {
+      config.cancenToken = new CancelToken(() => {
         // c就是取消请求的token
       });
       // 可以记录请求的取消函数
@@ -29,14 +31,15 @@ class HttpRequest {
         delete this.queue[url];
         if (Object.keys(this.queue).length) {
           // close loading
+          NProgress.done();
         }
-        if (res.data.err === 0) {
-          // 可以switch case状态
-          return res.data.data;
-        }
+        message.success('请求成功');
+        if (res.status === 200) return res.data;
+        return null;
       },
       (err) => {
         delete this.queue[url];
+        NProgress.done();
         return Promise.reject(err); // 失败抛出异常错误
       },
     );

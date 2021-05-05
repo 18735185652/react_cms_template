@@ -3,14 +3,13 @@ import {
   Layout, Menu,
 } from 'antd';
 import { useLocation, Link } from 'react-router-dom';
-
+import { Auth } from '../../utils/auth';
 import useMenuList from './menu';
 import HeaderBar from './Header';
 import Bread from './Bread';
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
-const Auth = 'user';
 
 const Index = ({ children }) => {
   const menuList = useMenuList();
@@ -104,10 +103,9 @@ const Index = ({ children }) => {
         <HeaderBar />
 
         <Content style={{ margin: '16px 16px' }}>
-          <>
-            <Bread menuList={menuList} />
-            <div>{children}</div>
-          </>
+
+          <Bread menuList={menuList} />
+          <div>{children}</div>
 
         </Content>
       </Layout>
