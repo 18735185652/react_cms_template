@@ -25,17 +25,6 @@ module.exports = {
       '@': resolve('src'),
     },
   },
-  devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    compress: true,
-    port: 8081,
-    hot: true,
-    inline: true,
-    open: true,
-    historyApiFallback: {
-      index: '/index.html',
-    },
-  },
   module: {
     rules: [
       {

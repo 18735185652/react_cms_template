@@ -1,9 +1,13 @@
 import Login from '../pages/login';
 import User from '../pages/user';
-import Article from '../pages/article';
+import List from '../pages/list';
+import Page404 from '../pages/page404';
+import Page403 from '../pages/page403';
 
+import Article from '../pages/article';
 import WorkBench from '../pages/workBench';
 import Layout from '../components/layout';
+
 // 菜单相关路由
 export const menus = [
   {
@@ -27,15 +31,35 @@ export const menus = [
   {
     path: '/article',
     name: '文章',
-    exact: true,
-    redirect: '/article/list',
     auth: ['admin', 'user'],
+    component: List,
+    routes: [
+      {
+        path: '/article',
+        exact: true,
+        redirect: '/article/list',
+        auth: ['admin', 'user'],
+      },
+      {
+        path: '/article/list',
+        name: '文章列表',
+        component: Article,
+        auth: ['admin', 'user'],
+      },
+
+    ],
   },
   {
-    path: '/article/list',
-    name: '文章列表',
-    component: Article,
+    path: '/page403',
+    name: '403',
     auth: ['admin', 'user'],
+    component: Page403,
+  },
+  {
+    path: '*',
+    name: '404',
+    auth: ['admin', 'user'],
+    component: Page404,
   },
 ];
 // 登录、首页、404路由

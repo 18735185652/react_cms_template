@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import {
+  Layout, Menu,
+} from 'antd';
+import { useLocation, Link } from 'react-router-dom';
 
 import useMenuList from './menu';
 import HeaderBar from './Header';
+import Bread from './Bread';
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -20,12 +23,7 @@ const Index = ({ children }) => {
   };
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    if (pathname === '/') {
-      setActiveKey('/workBench');
-    } else {
-      setActiveKey(pathname);
-    }
+  const openKeysChange = () => {
     const pathArr = pathname.slice(1).split('/');
     if (pathArr.length > 0) {
       const newPath = pathArr.slice(0, pathArr.length - 1);
@@ -37,14 +35,16 @@ const Index = ({ children }) => {
       });
       setOpenKeys(openKeys);
     }
+  };
+
+  useEffect(() => {
+    setActiveKey(pathname);
+    openKeysChange();
     return () => {
       setOpenKeys([]);
     };
   }, [pathname]);
 
-  const handleOpenChange = (keys) => {
-    setOpenKeys(keys);
-  };
   const renderMenu = (menus = []) => menus.map((item) => {
     if (item.auth.indexOf(Auth) === -1) return null;
     if (item.children) {
@@ -63,6 +63,7 @@ const Index = ({ children }) => {
       </Menu.Item>
     );
   });
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider
@@ -90,7 +91,7 @@ const Index = ({ children }) => {
           theme="light"
           selectedKeys={activeKey}
           openKeys={openKeys}
-          onOpenChange={handleOpenChange}
+          onOpenChange={setOpenKeys}
           onSelect={(e) => {
             setActiveKey(e.key);
           }}
@@ -103,7 +104,11 @@ const Index = ({ children }) => {
         <HeaderBar />
 
         <Content style={{ margin: '16px 16px' }}>
-          {children}
+          <>
+            <Bread menuList={menuList} />
+            <div>{children}</div>
+          </>
+
         </Content>
       </Layout>
     </Layout>

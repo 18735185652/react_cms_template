@@ -18,20 +18,22 @@ function renderRoutes(routes) {
       path={path}
       exact={exact}
       render={
-              (routeProps) => {
-                if (auth.indexOf(Auth) === -1) return null;
-                if (redirect) return <Redirect to={redirect} />;
-                return (
-                  RouteComponent && (
-                  <RouteComponent {...routeProps}>
-                    <Switch>
-                      {renderRoutes(childrenRoutes)}
-                    </Switch>
-                  </RouteComponent>
-                  )
-                );
-              }
+          (routeProps) => {
+            console.log('auth.indexOf(Auth) === -1', auth.indexOf(Auth) === -1);
+            if (auth.indexOf(Auth) === -1) return <Redirect to="/page403" />;
+            if (redirect) return <Redirect to={redirect} />;
+            console.log('RouteComponent', RouteComponent);
+            return (
+              RouteComponent && (
+              <RouteComponent {...routeProps}>
+                <Switch>
+                  {renderRoutes(childrenRoutes)}
+                </Switch>
+              </RouteComponent>
+              )
+            );
           }
+      }
     />
   ));
 }

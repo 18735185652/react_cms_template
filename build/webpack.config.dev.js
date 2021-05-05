@@ -11,7 +11,7 @@ module.exports = merge(base, {
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
-    port: 8081,
+    port: 8082,
     hot: true,
     inline: true,
     open: true,
