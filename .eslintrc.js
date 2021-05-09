@@ -1,26 +1,28 @@
 module.exports = {
-  parser: 'babel-eslint',
-  extends: 'airbnb',
-  rules: {
-    semi: 'error',
-    'no-console': 'off',
-    'linebreak-style': 'off',
-    'eol-last': 'off',
-    'react/jsx-filename-extension': 'off',
-    'react/prop-types': 'off',
-    'no-shadow': 'off',
-    'react/jsx-no-duplicate-props': 'off',
-    'react/destructuring-assignment': 'off',
-    'react/jsx-props-no-spreading': 'off',
-    'no-param-reassign': 'off',
-    'func-names': 'off',
-    'no-underscore-dangle': 'off',
-    'import/prefer-default-export': 'off',
-    'import/no-extraneous-dependencies': 'off',
-    // "indent":["error",2]
+  extends: ["airbnb", "plugin:prettier/recommended"], // eslint扩展规则
+  parserOptions: {
+    ecmaVersion: 7,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
+  parser: "babel-eslint", // 解决ES6 improt会报错
   env: {
+    // eg如果不配置browser，window就会被eslint报undefined的错
+    es6: true,
     browser: true,
     node: true,
+  },
+  plugins: ["react", "jsx-a11y", "import"],
+  rules: {
+    "class-methods-use-this": 0,
+    "import/no-named-as-default": 0,
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        extensions: [".js", ".jsx"],
+      },
+    ],
   },
 };
