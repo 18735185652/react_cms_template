@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import ReactDom from "react-dom";
 import {
   BrowserRouter as Router,
@@ -29,6 +29,7 @@ function renderRoutes(routes) {
           if (redirect) return <Redirect to={redirect} />;
           return (
             RouteComponent && (
+              // eslint-disable-next-line react/jsx-props-no-spreading
               <RouteComponent {...routeProps}>
                 <Switch>{renderRoutes(childrenRoutes)}</Switch>
               </RouteComponent>
