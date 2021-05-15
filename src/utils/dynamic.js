@@ -1,5 +1,5 @@
-import React, { lazy } from 'react';
-import { Spin } from 'antd';
+import React, { lazy } from "react";
+import { Spin } from "antd";
 
 // const Loading = () => <div>loading</div>;
 

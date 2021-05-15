@@ -1,10 +1,10 @@
-import axios from 'axios';
-import NProgress from 'nprogress';
-import { message } from 'antd';
+import axios from "axios";
+import NProgress from "nprogress";
+import { message } from "antd";
 
 class HttpRequest {
   constructor() {
-    this.baseURL = '/';
+    this.baseURL = "/";
     this.timeout = 3000;
     this.queue = {}; // 专门来维护请求队列的
   }
@@ -12,13 +12,14 @@ class HttpRequest {
   setInterceptor(instance, url, loading = true) {
     // 每个接口是否需要loading，默认需要展示
     instance.interceptors.request.use((config) => {
-      config.headers['Content-Type'] = 'application/json;charset=UTF-8';
+      config.headers["Content-Type"] = "application/json;charset=UTF-8";
       NProgress.start();
       if (Object.keys(this.queue).length === 0 && loading) {
         // 开启loading
         NProgress.start();
       }
       const { CancelToken } = axios;
+      // eslint-disable-next-line no-param-reassign
       config.cancenToken = new CancelToken(() => {
         // c就是取消请求的token
       });
@@ -33,7 +34,7 @@ class HttpRequest {
           // close loading
           NProgress.done();
         }
-        message.success('请求成功');
+        message.success("请求成功");
         if (res.status === 200) return res.data;
         return null;
       },
@@ -41,7 +42,7 @@ class HttpRequest {
         delete this.queue[url];
         NProgress.done();
         return Promise.reject(err); // 失败抛出异常错误
-      },
+      }
     );
   }
 
@@ -59,14 +60,15 @@ class HttpRequest {
   }
 
   get({ baseURL, url }) {
+    // eslint-disable-next-line no-underscore-dangle
     const _this = this;
+    // eslint-disable-next-line func-names
     return function (target, name) {
-      target.constructor.prototype[name] = function (data) {
-        console.log('url:', this);
+      target.constructor.prototype[name] = function fn(data) {
         return _this.request({
           // axios.get('/',params:{name:'zs'})
           url: baseURL + url,
-          method: 'GET',
+          method: "GET",
           ...data,
         });
       };
@@ -75,13 +77,16 @@ class HttpRequest {
   }
 
   post({ baseURL, url }) {
+    // eslint-disable-next-line no-underscore-dangle
     const _this = this;
+    // eslint-disable-next-line func-names
     return function (target, name) {
+      // eslint-disable-next-line no-param-reassign
       target.constructor.prototype[name] = function (data) {
-        console.log('url:', this);
+        console.log("url:", this);
         return _this.request({
           url: baseURL + url,
-          method: 'POST',
+          method: "POST",
           data,
         });
       };

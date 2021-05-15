@@ -8,13 +8,13 @@
 
 const enUS = {
   translation: {
-    Language: 'Language',
-    zhCN: 'Chinese',
-    enUS: 'English',
+    Language: "Language",
+    zhCN: "Chinese",
+    enUS: "English",
   },
   home: {
-    title: 'React PC development template',
-    technology: 'WorkBench',
+    title: "React PC development template",
+    technology: "WorkBench",
   },
 };
 export default enUS;

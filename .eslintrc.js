@@ -18,6 +18,13 @@ module.exports = {
   rules: {
     "class-methods-use-this": 0,
     "import/no-named-as-default": 0,
+    "react/prop-types": 0,
+    "no-shadow": 0,
+    "react/jsx-no-duplicate-props": 0,
+    "import/prefer-default-export": 0,
+    "no-underscore-dangle": 0,
+    "func-names": 0,
+    "no-param-reassign": 0,
     "react/jsx-filename-extension": [
       "error",
       {

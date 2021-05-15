@@ -1,8 +1,4 @@
-import React from 'react';
+import React from "react";
 
-const article = () => (
-  <div className="main-page">
-    article
-  </div>
-);
+const article = () => <div className="main-page">article</div>;
 export default article;

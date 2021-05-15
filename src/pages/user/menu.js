@@ -1,32 +1,31 @@
-import React from 'react';
+import React from "react";
 import {
   PieChartOutlined,
   UserOutlined,
   AppstoreOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
 const menuList = [
   {
-    key: '/workBench',
-    title: '工作台',
+    key: "/workBench",
+    title: "工作台",
     icon: <PieChartOutlined />,
   },
   {
-    key: '/user',
-    title: '用户',
+    key: "/user",
+    title: "用户",
     icon: <UserOutlined />,
   },
   {
-    key: '/article',
-    title: '文章列表',
+    key: "/article",
+    title: "文章列表",
     icon: <AppstoreOutlined />,
     children: [
       {
-        key: '/article/list',
-        title: '列表',
+        key: "/article/list",
+        title: "列表",
         icon: <AppstoreOutlined />,
       },
-
     ],
   },
 ];

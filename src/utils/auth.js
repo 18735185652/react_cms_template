@@ -1,1 +1,1 @@
-export const Auth = 'admin';
+export const Auth = "admin";
